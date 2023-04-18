@@ -14,6 +14,9 @@ export default {
         <div>
           <router-link to="/vendorInput" class="nav-link">Vendor</router-link>
         </div>
+        <div>
+          <router-link to="/product" class="nav-link">Product</router-link>
+        </div>
       </div>
     </nav>
   </div>
@@ -31,6 +34,7 @@ nav {
   position: fixed;
   background-color: rgb(239, 238, 238);
   z-index: 1;
+  padding-top: 10px;
 }
 
 .nav-link {

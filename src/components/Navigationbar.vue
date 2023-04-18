@@ -1,22 +1,31 @@
 <template>
-  <nav>
-    <p>Navbar</p>
+  <nav class="navbar">
+    <div class="navbar__text">PENGADAAN RSUD SAMRAT</div>
+    <RouterLink to="/Login" class="navbar__text navbar__text--right"
+      >Login</RouterLink
+    >
   </nav>
 </template>
 
 <style scoped>
-nav {
-  background-color: rgb(156, 155, 154);
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  padding: 1px;
-  width: 100%;
-  text-align: center;
-  padding-top: 3px;
+/* styling untuk navigation bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: gray;
+  padding: 10px;
 }
 
-.center {
-  text-align: center;
+/* styling untuk teks di dalam navigation bar */
+.navbar__text {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* styling khusus untuk teks di sebelah kanan */
+.navbar__text--right {
+  margin-left: auto;
 }
 </style>
