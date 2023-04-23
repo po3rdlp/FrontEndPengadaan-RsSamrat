@@ -1,5 +1,8 @@
 <template>
   <div v-for="product in products" :key="product.id">
+    <div>
+      <button class="delete" @click="deleteProduct(product.uuid)"></button>
+    </div>
     <div class="card">
       <img
         src="https://imgs.search.brave.com/W2jVaSZCbZME_eqOQ_h3jHbi8sMbFiyUfp11L_6p6Ls/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5B/ZG9KQXNpV2R3TU5H/MFpUdlVvVFVRSGFI/YSZwaWQ9QXBp"
@@ -8,6 +11,8 @@
       <div class="card-content">
         <h2>Nama Barang</h2>
         <p>{{ product.name }}</p>
+        <p>{{ product.productuuid }}</p>
+        <p>{{ product.description }}</p>
       </div>
     </div>
   </div>
@@ -30,10 +35,28 @@ export default {
       .then((response) => {
         this.products = response.data;
         console.log("Berhasil");
+        console.log(this.products[0].productuuid);
       })
       .catch((err) => {
         console.log(err);
       });
+  },
+  methods: {
+    deleteProduct() {
+      if (confirm(`Are you sure want to delete ${this.products[0].name}`)) {
+        axios
+          .delete(
+            `http://localhost:8080/products/${this.products[0].productuuid}`
+          )
+          .then((response) => {
+            console.log(response.data);
+            window.location.reload();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
   },
 };
 </script>
@@ -44,6 +67,7 @@ export default {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 16px;
+  margin-right: 70%;
   overflow: hidden;
 }
 
