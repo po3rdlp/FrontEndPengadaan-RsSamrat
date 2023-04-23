@@ -1,31 +1,35 @@
 <template>
-  <nav class="navbar">
-    <div class="navbar__text">PENGADAAN RSUD SAMRAT</div>
-    <RouterLink to="/Login" class="navbar__text navbar__text--right"
-      >Login</RouterLink
-    >
+  <nav>
+    <h1>RSUD Samratulangi Tondano</h1>
+    <RouterLink class="textroute" to="/Login">Login</RouterLink>
   </nav>
 </template>
 
 <style scoped>
 /* styling untuk navigation bar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+nav {
   background-color: gray;
+  position: fixed;
+  width: 100%;
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
 }
-
-/* styling untuk teks di dalam navigation bar */
-.navbar__text {
+nav h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: normal;
   color: white;
-  font-size: 15px;
-  font-weight: bold;
+  margin-right: auto;
 }
-
-/* styling khusus untuk teks di sebelah kanan */
-.navbar__text--right {
-  margin-left: auto;
+.textroute {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 16px;
 }
 </style>

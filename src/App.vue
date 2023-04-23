@@ -23,5 +23,8 @@ export default {
 <style>
 .content {
   text-align: center;
+  padding-top: 60px;
+  margin-right: 10px;
+  margin-left: 160px;
 }
 </style>

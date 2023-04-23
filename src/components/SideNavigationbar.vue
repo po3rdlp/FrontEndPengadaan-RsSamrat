@@ -1,52 +1,75 @@
-<script>
-export default {
-  name: "SideNavigationbar",
-};
-</script>
-
 <template>
-  <div>
-    <nav>
-      <div class="sidebar">
-        <div>
-          <router-link to="/" class="nav-link">Home</router-link>
-        </div>
-        <div>
-          <router-link to="/vendorInput" class="nav-link">Vendor</router-link>
-        </div>
-        <div>
-          <router-link to="/product" class="nav-link">Product</router-link>
-        </div>
-      </div>
-    </nav>
+  <div class="sidenav" :class="{ open: isOpen }">
+    <div>
+      <router-link to="/" class="nav-link">Home</router-link>
+    </div>
+    <div>
+      <router-link to="/vendorInput" class="nav-link">Vendor</router-link>
+    </div>
+    <div>
+      <router-link to="/product" class="nav-link">Product</router-link>
+    </div>
+    <div>
+      <router-link to="/productview" class="nav-link">View product</router-link>
+    </div>
+  </div>
+  <div class="menu-icon" @click="toggleNav">
+    <i class="fa fa-bars"></i>
   </div>
 </template>
 
+<script>
+export default {
+  name: "SideNavigationBar",
+  data() {
+    return {
+      isOpen: true,
+    };
+  },
+  methods: {
+    toggleNav() {
+      this.isOpen = !this.isOpen;
+    },
+  },
+};
+</script>
+
 <style scoped>
-nav {
-  display: flex;
-  flex-direction: row;
+@media screen and (min-width: 768px) {
+  .sidenav {
+    height: 100%;
+    width: 150px;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 50px; /* menempatkan sidenav 50px di bawah navigation bar */
+    background-color: #e0dbdb;
+    overflow-x: hidden;
+    padding-top: 10px;
+    transition: all 0.3s ease;
+    transform: translateX(-100%);
+  }
+
+  .sidenav.open {
+    transform: translateX(0);
+  }
+
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+
+  .sidenav a:hover {
+    color: #3f3f3f;
+  }
 }
 
-.sidebar {
-  width: 15%;
-  height: 100vh;
-  position: fixed;
-  background-color: rgb(239, 238, 238);
-  z-index: 1;
-  padding-top: 10px;
-}
-
-.nav-link {
-  display: block;
-  padding: 10px 20px;
-  color: rgb(91, 91, 91);
-  text-decoration: none;
-  margin-bottom: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.nav-link:hover {
-  background-color: gray;
+@media screen and (max-width: 767px) {
+  .sidenav {
+    display: initial;
+  }
 }
 </style>

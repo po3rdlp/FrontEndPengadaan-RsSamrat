@@ -1,8 +1,6 @@
-<script setup>
-const nama = "RS Samrat";
-</script>
-
 <script>
+import axios from "axios";
+
 export default {
   name: "Vendorpages",
 };
@@ -10,6 +8,6 @@ export default {
 
 <template>
   <div>
-    <p>Welcome {{ nama }}, this is Vendor pages</p>
+    <p>Vendor pages</p>
   </div>
 </template>
