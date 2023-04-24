@@ -37,10 +37,62 @@
           </form>
         </div>
         <p>{{ message }}</p>
+        <div v-show="isLoading">
+          <progress class="progress is-small is-primary" max="100">
+            50%
+          </progress>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+
+export default {
+  name: "Productpages",
+
+  data() {
+    return {
+      isLoading: false,
+      product: {
+        name: "",
+        price: "",
+        quantity: "",
+        description: "",
+      },
+      message: "",
+    };
+  },
+  methods: {
+    Submitform() {
+      this.isLoading = true;
+      axios
+        .post(
+          "http://localhost:8080/products/VEN168216544493415F1",
+          this.product
+        )
+        .then((response) => {
+          this.message = response.data;
+          this.product.name = "";
+          this.product.price = "";
+          this.product.quantity = "";
+          this.product.description = "";
+          console.log(
+            `Berhasil ditambahkan, Deskripsi: ${this.product.description}`
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
+    },
+  },
+};
+</script>
 
 <style>
 .container {
@@ -67,45 +119,3 @@ input {
   width: 5%;
 }
 </style>
-
-<script>
-import axios from "axios";
-
-export default {
-  name: "Productpages",
-
-  data() {
-    return {
-      product: {
-        name: "",
-        price: "",
-        quantity: "",
-        description: "",
-      },
-      message: "",
-    };
-  },
-  methods: {
-    Submitform() {
-      axios
-        .post(
-          "http://localhost:8080/products/VEN168216544493415F1",
-          this.product
-        )
-        .then((response) => {
-          this.message = response.data;
-          this.product.name = "";
-          this.product.price = "";
-          this.product.quantity = "";
-          this.product.description = "";
-          console.log(
-            `Berhasil ditambahkan, Deskripsi: ${this.product.description}`
-          );
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
-};
-</script>

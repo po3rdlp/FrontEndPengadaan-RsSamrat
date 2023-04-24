@@ -1,7 +1,13 @@
 <template>
+  <div v-if="connectionFailed && products == null" class="failedconnect">
+    <h1>KONEKSI GAGAL</h1>
+  </div>
   <div v-for="product in products" :key="product.id">
-    <div>
-      <button class="delete" @click="deleteProduct(product.uuid)"></button>
+    <div style="margin-left: 50%">
+      <button class="button is-danger" @click="deleteProduct(product.uuid)">
+        Delete
+      </button>
+      <button class="button is-primary" @click="selectProduct()">Edit</button>
     </div>
     <div class="card">
       <img
@@ -9,28 +15,42 @@
         alt="Card image"
       />
       <div class="card-content">
-        <h2>Nama Barang</h2>
-        <p>{{ product.name }}</p>
+        <h1>{{ product.name }}</h1>
         <p>{{ product.productuuid }}</p>
         <p>{{ product.description }}</p>
       </div>
     </div>
   </div>
+
+  <!-- Modals edit Product -->
+  <Teleport to="body">
+    <!-- pakai komponen modal, passing ke prop(lihat Editproduct.vue) -->
+    <modal
+      :show="showmodaleditProduct"
+      :product="products"
+      @close="showmodaleditProduct = false"
+    />
+  </Teleport>
 </template>
 
 <script>
 import axios from "axios";
+import modal from "../components/modals/Editproduct.vue";
 
 export default {
   name: "Productpagesview",
+  components: { modal },
 
   data() {
     return {
       products: [],
+      connectionFailed: false,
+      showmodaleditProduct: false,
+      selectedProduct: false,
     };
   },
   created() {
-    axios
+    axios /* datta produk berdasarkan uuid vendor */
       .get("http://localhost:8080/products/vendor/VEN168216544493415F1")
       .then((response) => {
         this.products = response.data;
@@ -39,11 +59,13 @@ export default {
       })
       .catch((err) => {
         console.log(err);
+        this.connectionFailed = true;
       });
   },
   methods: {
     deleteProduct() {
-      if (confirm(`Are you sure want to delete ${this.products[0].name}`)) {
+      /* hapus produk berdasaarkan produkuuid */
+      if (confirm(`Are you sure want to delete "${this.products[0].name}"`)) {
         axios
           .delete(
             `http://localhost:8080/products/${this.products[0].productuuid}`
@@ -57,6 +79,12 @@ export default {
           });
       }
     },
+    selectProduct() {
+      this.showmodaleditProduct = true;
+      console.log(
+        `Anda akan mengedit produk dengan nama ${this.products[0].name}`
+      );
+    },
   },
 };
 </script>
@@ -66,8 +94,8 @@ export default {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 16px;
-  margin-right: 70%;
+  margin: 20px;
+
   overflow: hidden;
 }
 
@@ -100,5 +128,9 @@ export default {
 
 .button:hover {
   background-color: #0069d9;
+}
+
+.failedconnect {
+  margin-top: 20%;
 }
 </style>
