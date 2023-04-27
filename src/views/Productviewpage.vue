@@ -4,16 +4,18 @@
   </div>
   <div v-for="product in products" :key="product.id">
     <div style="margin-left: 50%">
-      <button class="button is-danger" @click="deleteProduct(product.uuid)">
+      <button
+        class="button is-danger"
+        @click="deleteProduct(product.productuuid, product.name)"
+      >
         Delete
       </button>
-      <button class="button is-primary" @click="selectProduct()">Edit</button>
+      <button class="button is-primary" @click="selectProduct(product)">
+        Edit
+      </button>
     </div>
     <div class="card">
-      <img
-        src="https://imgs.search.brave.com/W2jVaSZCbZME_eqOQ_h3jHbi8sMbFiyUfp11L_6p6Ls/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5B/ZG9KQXNpV2R3TU5H/MFpUdlVvVFVRSGFI/YSZwaWQ9QXBp"
-        alt="Card image"
-      />
+      <img src="../../src/components/img/user-interface.png" alt="Card image" />
       <div class="card-content">
         <h1>{{ product.name }}</h1>
         <p>{{ product.productuuid }}</p>
@@ -27,7 +29,7 @@
     <!-- pakai komponen modal, passing ke prop(lihat Editproduct.vue) -->
     <modal
       :show="showmodaleditProduct"
-      :product="products"
+      :product="selectedProduct"
       @close="showmodaleditProduct = false"
     />
   </Teleport>
@@ -46,7 +48,7 @@ export default {
       products: [],
       connectionFailed: false,
       showmodaleditProduct: false,
-      selectedProduct: false,
+      selectedProduct: null,
     };
   },
   created() {
@@ -54,8 +56,7 @@ export default {
       .get("http://localhost:8080/products/vendor/VEN168216544493415F1")
       .then((response) => {
         this.products = response.data;
-        console.log("Berhasil");
-        console.log(this.products[0].productuuid);
+        console.log("Berhasil mengambil data");
       })
       .catch((err) => {
         console.log(err);
@@ -63,27 +64,24 @@ export default {
       });
   },
   methods: {
-    deleteProduct() {
+    deleteProduct(idproduk, namaproduk) {
       /* hapus produk berdasaarkan produkuuid */
-      if (confirm(`Are you sure want to delete "${this.products[0].name}"`)) {
+      if (confirm(`Are you sure want to delete "${namaproduk}"`)) {
         axios
-          .delete(
-            `http://localhost:8080/products/${this.products[0].productuuid}`
-          )
+          .delete(`http://localhost:8080/products/${idproduk}`)
           .then((response) => {
             console.log(response.data);
             window.location.reload();
+            console.log(`delete ${produk}`);
           })
           .catch((err) => {
             console.log(err);
           });
       }
     },
-    selectProduct() {
+    selectProduct(produk) {
       this.showmodaleditProduct = true;
-      console.log(
-        `Anda akan mengedit produk dengan nama ${this.products[0].name}`
-      );
+      this.selectedProduct = produk;
     },
   },
 };

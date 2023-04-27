@@ -3,11 +3,15 @@
     <div v-if="show" class="modal-mask">
       <div class="modal-container">
         <div class="modal-header">
-          <h1 style="font-weight: bold">Edit Product</h1>
+          <h1 style="font-weight: bold">
+            Edit Product:
+            <h1 style="font-style: italic; font-weight: bolder">
+              {{ product.name }}
+            </h1>
+          </h1>
         </div>
-
         <div class="modal-body">
-          <form @submit.prevent="submitFormEditProducts">
+          <form @submit.prevent="submitFormEditProducts()">
             <label for="productname">Product Name:</label>
             <input type="text" v-model="products.name" class="input is-small" />
             <div>
@@ -62,21 +66,14 @@ export default {
 
   data() {
     return {
-      products: {
-        name: "",
-        price: "",
-        quantity: "",
-        description: "",
-      },
+      products: { ...this.product },
     };
   },
+
   methods: {
-    submitFormEditProducts() {
+    submitFormEditProducts(id) {
       axios
-        .put(
-          `http://localhost:8080/products/${this.products[0].productuuid}`,
-          this.product
-        )
+        .put(`http://localhost:8080/products/${id}`, this.product)
         .then((response) => {
           console.log(response.data);
         })
