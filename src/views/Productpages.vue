@@ -11,6 +11,7 @@
               placeholder="Product Name"
               id="Productname"
               class="input is-small"
+              required
             />
             <label for="price">Price:</label>
             <input
@@ -18,6 +19,7 @@
               v-model="product.price"
               placeholder="Price"
               class="input is-small"
+              required
             />
             <label for="quantity">Quantity:</label>
             <input
@@ -25,6 +27,7 @@
               v-model="product.quantity"
               placeholder="Quantity"
               class="input is-small"
+              required
             />
             <label for="description">Description:</label>
             <input

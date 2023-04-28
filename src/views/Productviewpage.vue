@@ -11,28 +11,25 @@
       <p>You selected: {{ selectedUser }}</p>
     </div>
     <!-- IF USER == selected user show product :) -->
-    <div v-if="selectedUser">
+    <div v-if="selectedUser" class="containerCard">
       <div v-for="product in products" :key="product.id">
-        <div style="margin-left: 50%">
-          <button
-            class="button is-danger"
-            @click="deleteProduct(product.productuuid, product.name)"
-          >
-            Delete
-          </button>
-          <button class="button is-primary" @click="selectProduct(product)">
-            Edit
-          </button>
-        </div>
         <div class="card">
-          <img
-            src="../../src/components/img/user-interface.png"
-            alt="Card image"
-          />
+          <img src="../components/img/user-interface.png" alt="Card image" />
           <div class="card-content">
             <h1>{{ product.name }}</h1>
             <p>{{ product.productuuid }}</p>
             <p>{{ product.description }}</p>
+            <div style="margin-left: 50%">
+              <button
+                class="button is-danger"
+                @click="deleteProduct(product.productuuid, product.name)"
+              >
+                Delete
+              </button>
+              <button class="button is-primary" @click="selectProduct(product)">
+                Edit
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -121,10 +118,12 @@ export default {
           });
       }
     },
+    /* Select product for edit */
     selectProduct(produk) {
       this.showmodaleditProduct = true;
       this.selectedProduct = produk;
     },
+    /* Select Vendor uuid to show Vendor product */
     selectUser(useruuid) {
       this.selectedUser = useruuid;
       console.log(`hello`);
@@ -149,12 +148,11 @@ export default {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 20px;
-
   overflow: hidden;
 }
 
 .card img {
-  width: 100px;
+  width: 50%;
   height: 300px;
 }
 
@@ -169,6 +167,11 @@ export default {
 
 .card-content p {
   margin: 16px 0;
+}
+
+.containerCard {
+  padding: 350px;
+  margin-top: -350px;
 }
 
 .button {
