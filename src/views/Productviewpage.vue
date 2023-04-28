@@ -1,8 +1,49 @@
 <template>
+  <div>
+    <!--CHOOSE USER(TESTING WAITING OAUTH)-->
+    <div>
+      <label for="my-dropdown"> USER : </label>
+      <select v-model="selectedUser" @change="selectUser(selectedUser)">
+        <option v-for="user in users" :key="user.vendoruuid">
+          {{ user.vendoruuid }}
+        </option>
+      </select>
+      <p>You selected: {{ selectedUser }}</p>
+    </div>
+    <!-- IF USER == selected user show product :) -->
+    <div v-if="selectedUser">
+      <div v-for="product in products" :key="product.id">
+        <div style="margin-left: 50%">
+          <button
+            class="button is-danger"
+            @click="deleteProduct(product.productuuid, product.name)"
+          >
+            Delete
+          </button>
+          <button class="button is-primary" @click="selectProduct(product)">
+            Edit
+          </button>
+        </div>
+        <div class="card">
+          <img
+            src="../../src/components/img/user-interface.png"
+            alt="Card image"
+          />
+          <div class="card-content">
+            <h1>{{ product.name }}</h1>
+            <p>{{ product.productuuid }}</p>
+            <p>{{ product.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--CHOOSE USER(TESTING WAITING OAUTH)-->
+  </div>
   <div v-if="connectionFailed && products == null" class="failedconnect">
     <h1>KONEKSI GAGAL</h1>
   </div>
-  <div v-for="product in products" :key="product.id">
+  <!-- CHANGE THIS IF OAUTH update :) -->
+  <!-- <div v-for="product in products" :key="product.id">
     <div style="margin-left: 50%">
       <button
         class="button is-danger"
@@ -22,7 +63,7 @@
         <p>{{ product.description }}</p>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Modals edit Product -->
   <Teleport to="body">
@@ -45,22 +86,23 @@ export default {
 
   data() {
     return {
+      users: [],
       products: [],
+
       connectionFailed: false,
       showmodaleditProduct: false,
       selectedProduct: null,
+      selectedUser: null,
     };
   },
   created() {
-    axios /* datta produk berdasarkan uuid vendor */
-      .get("http://localhost:8080/products/vendor/VEN168216544493415F1")
+    axios
+      .get("http://localhost:8080/vendors")
       .then((response) => {
-        this.products = response.data;
-        console.log("Berhasil mengambil data");
+        this.users = response.data;
       })
       .catch((err) => {
-        console.log(err);
-        this.connectionFailed = true;
+        console.log(`Terjadi error, ${err}`);
       });
   },
   methods: {
@@ -82,6 +124,20 @@ export default {
     selectProduct(produk) {
       this.showmodaleditProduct = true;
       this.selectedProduct = produk;
+    },
+    selectUser(useruuid) {
+      this.selectedUser = useruuid;
+      console.log(`hello`);
+      axios /* datta produk berdasarkan uuid vendor */
+        .get(`http://localhost:8080/products/vendor/${useruuid}`)
+        .then((response) => {
+          this.products = response.data;
+          console.log("Berhasil mengambil data ", useruuid);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.connectionFailed = true;
+        });
     },
   },
 };

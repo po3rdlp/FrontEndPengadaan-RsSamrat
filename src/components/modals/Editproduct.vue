@@ -71,11 +71,15 @@ export default {
   },
 
   methods: {
-    submitFormEditProducts(id) {
+    submitFormEditProducts() {
       axios
-        .put(`http://localhost:8080/products/${id}`, this.product)
+        .put(
+          `http://localhost:8080/products/${this.product.productuuid}`,
+          this.products
+        )
         .then((response) => {
           console.log(response.data);
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
