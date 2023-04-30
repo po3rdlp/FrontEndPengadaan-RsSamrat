@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <h1>RSUD Samratulangi Tondano</h1>
+    <h1>RS Samrat Pengadaan</h1>
     <RouterLink class="textroute" to="/Login">Login</RouterLink>
   </nav>
 </template>

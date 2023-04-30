@@ -94,12 +94,12 @@ export default {
   },
   created() {
     axios
-      .get("http://localhost:8080/vendors")
+      .get("http://rsudsamrat.site:8080/pengadaan/dev/v1/vendors")
       .then((response) => {
         this.users = response.data;
       })
       .catch((err) => {
-        console.log(`Terjadi error, ${err}`);
+        console.log(`Terjadi error guyss, ${err}`);
       });
   },
   methods: {
@@ -107,7 +107,9 @@ export default {
       /* hapus produk berdasaarkan produkuuid */
       if (confirm(`Are you sure want to delete "${namaproduk}"`)) {
         axios
-          .delete(`http://localhost:8080/products/${idproduk}`)
+          .delete(
+            `http://rsudsamrat.site:8080/pengadaan/dev/v1/products/${idproduk}`
+          )
           .then((response) => {
             console.log(response.data);
             window.location.reload();
@@ -128,7 +130,9 @@ export default {
       this.selectedUser = useruuid;
       console.log(`hello`);
       axios /* datta produk berdasarkan uuid vendor */
-        .get(`http://localhost:8080/products/vendor/${useruuid}`)
+        .get(
+          `http://rsudsamrat.site:8080/pengadaan/dev/v1/products/vendor/${useruuid}`
+        )
         .then((response) => {
           this.products = response.data;
           console.log("Berhasil mengambil data ", useruuid);

@@ -73,7 +73,7 @@ export default {
       this.isLoading = true;
       axios
         .post(
-          "http://localhost:8080/products/VEN1682164566190815F",
+          "http://rsudsamrat.site:8080/pengadaan/dev/v1/products/VEN1682790001791D435",
           this.product
         )
         .then((response) => {

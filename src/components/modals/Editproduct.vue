@@ -74,7 +74,7 @@ export default {
     submitFormEditProducts() {
       axios
         .put(
-          `http://localhost:8080/products/${this.product.productuuid}`,
+          `http://rsudsamrat.site:8080/pengadaan/dev/v1/products/${this.product.productuuid}`,
           this.products
         )
         .then((response) => {
