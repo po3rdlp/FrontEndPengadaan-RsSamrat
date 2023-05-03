@@ -4,6 +4,7 @@ import Vendorpages from "../../views/Vendorpages.vue";
 import Login from "../../components/auth/Login.vue";
 import Productpages from "../../views/Productpages.vue";
 import Productviewpage from "../../views/Productviewpage.vue";
+import Productlistall from "../../views/Productlistall.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,10 @@ const router = createRouter({
     {
       path: "/productview",
       component: Productviewpage,
+    },
+    {
+      path: "/productlist/pengadaan/dev/v1/products/:page/:size",
+      component: Productlistall,
     },
     // {
     //   path: '/about',

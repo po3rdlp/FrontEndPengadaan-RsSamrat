@@ -10,7 +10,16 @@
       <router-link to="/product" class="nav-link">Product</router-link>
     </div>
     <div>
-      <router-link to="/productview" class="nav-link">View product</router-link>
+      <router-link to="/productview" class="nav-link"
+        >View product by vendor</router-link
+      >
+    </div>
+    <div>
+      <router-link
+        to="/productlist/pengadaan/dev/v1/products/:page/:size"
+        class="nav-link"
+        >List Product</router-link
+      >
     </div>
   </div>
   <div class="menu-icon" @click="toggleNav">

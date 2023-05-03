@@ -40,11 +40,7 @@
           </form>
         </div>
         <p>{{ message }}</p>
-        <div v-show="isLoading">
-          <progress class="progress is-small is-primary" max="100">
-            50%
-          </progress>
-        </div>
+        <loadingBar v-if="isLoading" />
       </div>
     </div>
   </div>
@@ -52,9 +48,11 @@
 
 <script>
 import axios from "axios";
+import loadingBar from "../components/molecules/loadingBar.vue";
 
 export default {
   name: "Productpages",
+  components: { loadingBar },
 
   data() {
     return {
@@ -73,7 +71,7 @@ export default {
       this.isLoading = true;
       axios
         .post(
-          "http://rsudsamrat.site:8080/pengadaan/dev/v1/products/VEN1682790001791D435",
+          "http://rsudsamrat.site:8080/pengadaan/dev/v1/products/VEN16828810632889339",
           this.product
         )
         .then((response) => {
