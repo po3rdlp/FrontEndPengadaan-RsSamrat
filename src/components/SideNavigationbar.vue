@@ -15,11 +15,7 @@
       >
     </div>
     <div>
-      <router-link
-        to="/productlist/pengadaan/dev/v1/products/:page/:size"
-        class="nav-link"
-        >List Product</router-link
-      >
+      <router-link to="/productlist" class="nav-link">List Product</router-link>
     </div>
   </div>
   <div class="menu-icon" @click="toggleNav">

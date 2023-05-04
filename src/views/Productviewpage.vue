@@ -34,33 +34,10 @@
         </div>
       </div>
     </div>
-    <!--CHOOSE USER(TESTING WAITING OAUTH)-->
   </div>
   <div v-if="connectionFailed && products == null" class="failedconnect">
     <h1>KONEKSI GAGAL</h1>
   </div>
-  <!-- CHANGE THIS IF OAUTH update :) -->
-  <!-- <div v-for="product in products" :key="product.id">
-    <div style="margin-left: 50%">
-      <button
-        class="button is-danger"
-        @click="deleteProduct(product.productuuid, product.name)"
-      >
-        Delete
-      </button>
-      <button class="button is-primary" @click="selectProduct(product)">
-        Edit
-      </button>
-    </div>
-    <div class="card">
-      <img src="../../src/components/img/user-interface.png" alt="Card image" />
-      <div class="card-content">
-        <h1>{{ product.name }}</h1>
-        <p>{{ product.productuuid }}</p>
-        <p>{{ product.description }}</p>
-      </div>
-    </div>
-  </div> -->
 
   <!-- Modals edit Product -->
   <Teleport to="body">

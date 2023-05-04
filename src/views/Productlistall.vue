@@ -3,6 +3,7 @@
     <table>
       <thead>
         <tr>
+          <th>Product ID</th>
           <th>Product Name</th>
           <th>Price</th>
           <th>Quantity</th>
@@ -11,6 +12,7 @@
       </thead>
       <tbody v-for="product in products" :key="product.id">
         <tr>
+          <td>{{ product.id }}</td>
           <td>{{ product.name }}</td>
           <td>{{ product.price }}</td>
           <td>{{ product.quantity }}</td>
@@ -26,7 +28,8 @@
 
 <script>
 import axios from "axios";
-import loadingBarVue from "../components/molecules/loadingBar.vue";
+
+import loadingBarVue from "../components/molecules/LoadingBar.vue";
 
 export default {
   name: "Productpagesview",
@@ -65,7 +68,9 @@ export default {
           this.products = response.data.content;
           console.log(response.data);
           if (this.products.length > 0) {
-            console.log(`Berhasil mengambil ${this.products.length} produk`);
+            console.log(
+              `Berhasil mengambil ${this.products.length} produk pada halaman ${this.page}`
+            );
           } else {
             console.log(`Belum ada produk yang dimuat`);
           }

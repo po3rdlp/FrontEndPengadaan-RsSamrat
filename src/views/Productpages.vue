@@ -40,7 +40,7 @@
           </form>
         </div>
         <p>{{ message }}</p>
-        <loadingBar v-if="isLoading" />
+        <LoadingBar v-if="isLoading" />
       </div>
     </div>
   </div>
@@ -48,12 +48,10 @@
 
 <script>
 import axios from "axios";
-import loadingBar from "../components/molecules/loadingBar.vue";
-
+import LoadingBar from "../components/molecules/LoadingBar.vue";
 export default {
   name: "Productpages",
-  components: { loadingBar },
-
+  components: { LoadingBar },
   data() {
     return {
       isLoading: false,

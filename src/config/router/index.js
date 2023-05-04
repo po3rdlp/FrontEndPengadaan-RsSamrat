@@ -29,10 +29,12 @@ const router = createRouter({
     {
       path: "/productview",
       component: Productviewpage,
+      props: true,
     },
     {
-      path: "/productlist/pengadaan/dev/v1/products/:page/:size",
+      path: "/productlist",
       component: Productlistall,
+      props: true,
     },
     // {
     //   path: '/about',
