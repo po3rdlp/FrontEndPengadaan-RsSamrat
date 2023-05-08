@@ -36,7 +36,26 @@
               placeholder="Description"
               class="input is-small"
             />
-            <button class="button is-small" type="submit">Submit</button>
+            <button
+              class="button is-success"
+              v-if="!isLoading"
+              type="submit"
+              style="margin-top: 10px"
+            >
+              Submit
+            </button>
+            <button
+              class="button is-success"
+              v-if="isLoading"
+              type="button"
+              disabled
+              style="margin-top: 10px"
+            >
+              <span class="icon">
+                <i class="fas fa-spinner fa-spin"></i>
+              </span>
+              <span>Loading...</span>
+            </button>
           </form>
         </div>
         <p>{{ message }}</p>

@@ -53,7 +53,10 @@ export default {
     z-index: 1;
     left: 0;
     top: 50px; /* menempatkan sidenav 50px di bawah navigation bar */
-    background-color: #e0dbdb;
+    background-color: #bcbcbc;
+    color: #1a5276;
+    border-top: 20px solid #929292;
+    border-right: 0.2px solid #bcbcbc;
     overflow-x: hidden;
     padding-top: 10px;
     transition: all 0.3s ease;

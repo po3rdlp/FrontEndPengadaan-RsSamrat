@@ -1,5 +1,7 @@
 nav {
-  background-color: gray;
+  background-color: #c53333;
+  color: #1a5276;
+  border-bottom: px solid #929292;
   position: fixed;
   width: 100%;
   padding: 10px;

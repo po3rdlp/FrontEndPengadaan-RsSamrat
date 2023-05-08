@@ -27,17 +27,38 @@ export default {
       </div>
     </div>
   </div>
+  <div>
+    <footer>
+      <span>RSUD SAMRATULANGI TONDANO</span> &copy; 2023. All Rights Reserved.
+    </footer>
+  </div>
 </template>
 
 <style>
 .content {
   text-align: center;
-  padding-top: 60px;
+  padding-top: 70px;
   margin-right: 10px;
   margin-left: 160px;
 }
 .contentNoLoggedin {
   text-align: center;
   padding-top: 25%;
+}
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+footer span {
+  font-weight: bold;
+  font-size: 16px;
 }
 </style>
