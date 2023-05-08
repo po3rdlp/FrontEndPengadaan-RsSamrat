@@ -1,17 +1,7 @@
 <template>
   <div>
-    <!--CHOOSE USER(TESTING WAITING OAUTH)-->
-    <div>
-      <label for="my-dropdown"> USER : </label>
-      <select v-model="selectedUser" @change="selectUser(selectedUser)">
-        <option v-for="user in users" :key="user.vendoruuid">
-          {{ user.vendoruuid }}
-        </option>
-      </select>
-      <p>You selected: {{ selectedUser }}</p>
-    </div>
-    <!-- IF USER == selected user show product :) -->
-    <div v-if="selectedUser" class="containerCard">
+    <div class="containerCard">
+      <LoadingBar v-if="isLoading" />
       <div v-for="product in products" :key="product.id">
         <div class="card">
           <img src="../components/img/user-interface.png" alt="Card image" />
@@ -53,10 +43,12 @@
 <script>
 import axios from "axios";
 import modal from "../components/modals/Editproduct.vue";
+import LoadingBar from "../components/molecules/LoadingBar.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Productpagesview",
-  components: { modal },
+  components: { modal, LoadingBar },
 
   data() {
     return {
@@ -67,16 +59,26 @@ export default {
       showmodaleditProduct: false,
       selectedProduct: null,
       selectedUser: null,
+      isLoading: false,
     };
   },
+  computed: {
+    ...mapGetters(["vendoruuid"]),
+  },
   created() {
+    this.isLoading = true;
     axios
-      .get("http://rsudsamrat.site:8080/pengadaan/dev/v1/vendors")
+      .get(
+        `http://rsudsamrat.site:8080/pengadaan/dev/v1/products/vendor/${this.vendoruuid}`
+      )
       .then((response) => {
-        this.users = response.data;
+        this.products = response.data;
       })
       .catch((err) => {
         console.log(`Terjadi error guyss, ${err}`);
+      })
+      .finally(() => {
+        this.isLoading = false;
       });
   },
   methods: {
@@ -101,23 +103,6 @@ export default {
     selectProduct(produk) {
       this.showmodaleditProduct = true;
       this.selectedProduct = produk;
-    },
-    /* Select Vendor uuid to show Vendor product */
-    selectUser(useruuid) {
-      this.selectedUser = useruuid;
-      console.log(`hello`);
-      axios /* datta produk berdasarkan uuid vendor */
-        .get(
-          `http://rsudsamrat.site:8080/pengadaan/dev/v1/products/vendor/${useruuid}`
-        )
-        .then((response) => {
-          this.products = response.data;
-          console.log("Berhasil mengambil data ", useruuid);
-        })
-        .catch((err) => {
-          console.log(err);
-          this.connectionFailed = true;
-        });
     },
   },
 };
