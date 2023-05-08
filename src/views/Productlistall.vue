@@ -45,7 +45,6 @@ export default {
     };
   },
   created() {
-    this.page = 0;
     this.loadProducts();
   },
   computed: {

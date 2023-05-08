@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Homepages from "../../views/Homepages.vue";
 import Vendorpages from "../../views/Vendorpages.vue";
-import Login from "../../components/auth/Login.vue";
 import Productpages from "../../views/Productpages.vue";
 import Productviewpage from "../../views/Productviewpage.vue";
 import Productlistall from "../../views/Productlistall.vue";
+import VendorList from "../../views/VendorList.vue";
+import VendorUpdate from "../../views/relativeViews/VendorUpdate.vue";
+import NotFoundPage from "../../views/relativeViews/NotFoundPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,22 +21,30 @@ const router = createRouter({
       component: Vendorpages,
     },
     {
-      path: "/Login",
-      component: Login,
-    },
-    {
       path: "/product",
       component: Productpages,
     },
     {
       path: "/productview",
       component: Productviewpage,
+    },
+    {
+      path: "/productlist/:page",
+      component: Productlistall,
       props: true,
     },
     {
-      path: "/productlist",
-      component: Productlistall,
-      props: true,
+      path: "/vendorList",
+      component: VendorList,
+    },
+    {
+      path: "/VendorUpdate/:id/:name",
+      name: "VendorUpdate",
+      component: VendorUpdate,
+    },
+    {
+      path: "/:catchAll(.*)",
+      component: NotFoundPage,
     },
     // {
     //   path: '/about',

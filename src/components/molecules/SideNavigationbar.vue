@@ -7,6 +7,9 @@
       <router-link to="/vendorInput" class="nav-link">Vendor</router-link>
     </div>
     <div>
+      <router-link to="/vendorList" class="nav-link">List Vendor</router-link>
+    </div>
+    <div>
       <router-link to="/product" class="nav-link">Product</router-link>
     </div>
     <div>
@@ -15,7 +18,9 @@
       >
     </div>
     <div>
-      <router-link to="/productlist" class="nav-link">List Product</router-link>
+      <router-link to="/productlist/:page" class="nav-link"
+        >List Product</router-link
+      >
     </div>
   </div>
   <div class="menu-icon" @click="toggleNav">

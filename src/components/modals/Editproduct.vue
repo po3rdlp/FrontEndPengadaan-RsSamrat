@@ -37,11 +37,7 @@
               class="input is-small"
             />
             <div class="modal-footer">
-              <button
-                class="button is-danger"
-                type="submit"
-                @click="$emit('close')"
-              >
+              <button class="button is-danger" @click="$emit('close')">
                 save
               </button>
             </div>
