@@ -1,7 +1,13 @@
 <template>
   <nav>
     <h1>RS Samrat Pengadaan</h1>
-    <button class="button is-link" @click="showmodalLogin = true">Login</button>
+    <button
+      class="button is-link"
+      @click="showmodalLogin = true"
+      v-if="!isLoggedIn"
+    >
+      Login
+    </button>
   </nav>
 
   <Teleport to="body">
@@ -11,6 +17,7 @@
 
 <script>
 import LoginModal from "../modals/Login.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: { LoginModal },
@@ -19,6 +26,9 @@ export default {
     return {
       showmodalLogin: false,
     };
+  },
+  computed: {
+    ...mapGetters(["isLoggedIn"]),
   },
 };
 </script>

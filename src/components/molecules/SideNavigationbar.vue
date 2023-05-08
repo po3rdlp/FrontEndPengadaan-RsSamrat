@@ -4,13 +4,13 @@
       <router-link to="/" class="nav-link">Home</router-link>
     </div>
     <div>
+      <router-link to="/product" class="nav-link">Add Product</router-link>
+    </div>
+    <div>
       <router-link to="/vendorInput" class="nav-link">Vendor</router-link>
     </div>
     <div>
       <router-link to="/vendorList" class="nav-link">List Vendor</router-link>
-    </div>
-    <div>
-      <router-link to="/product" class="nav-link">Product</router-link>
     </div>
     <div>
       <router-link to="/productview" class="nav-link"

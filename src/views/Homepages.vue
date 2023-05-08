@@ -1,7 +1,8 @@
 <template>
   <div>
-    <p>Hello This is Home pages</p>
+    <h1>WELCOME {{ username }}</h1>
     {{ message }}
+    {{ vendoruuid }}
   </div>
 </template>
 
@@ -12,7 +13,7 @@ export default {
   name: "Homepages",
 
   computed: {
-    ...mapGetters(["message"]),
+    ...mapGetters(["message", "username", "vendoruuid"]),
   },
 };
 </script>

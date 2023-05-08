@@ -49,6 +49,8 @@
 <script>
 import axios from "axios";
 import LoadingBar from "../components/molecules/LoadingBar.vue";
+import { mapGetters, Store } from "vuex";
+
 export default {
   name: "Productpages",
   components: { LoadingBar },
@@ -64,12 +66,15 @@ export default {
       message: "",
     };
   },
+  computed: {
+    ...mapGetters(["vendoruuid"]),
+  },
   methods: {
     Submitform() {
       this.isLoading = true;
       axios
         .post(
-          "http://rsudsamrat.site:8080/pengadaan/dev/v1/products/VEN16828810632889339",
+          `http://rsudsamrat.site:8080/pengadaan/dev/v1/products/${this.vendoruuid}`,
           this.product
         )
         .then((response) => {

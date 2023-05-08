@@ -6,6 +6,8 @@ const store = createStore({
   state: {
     isLoggedIn: false,
     message: "",
+    username: null,
+    vendoruuid: null,
   },
   mutations: {
     SET_IS_LOGGED_IN(state, value) {
@@ -13,6 +15,12 @@ const store = createStore({
     },
     SET_MESSAGE(state, message) {
       state.message = message;
+    },
+    SET_USERNAME(state, username) {
+      state.username = username;
+    },
+    SET_VENDOR_UUID(state, vendoruuid) {
+      state.vendoruuid = vendoruuid;
     },
   },
   actions: {
@@ -22,7 +30,20 @@ const store = createStore({
         .then((response) => {
           commit("SET_IS_LOGGED_IN", true);
           commit("SET_MESSAGE", response.data);
-          router.push("/");
+          commit("SET_USERNAME", vendor.username);
+          // mengambil vendor uuid (getvendorbyownerid)
+          axios
+            .get(
+              `http://rsudsamrat.site:8080/pengadaan/dev/v1/vendors/owner/${response.data.id}`
+            )
+            .then((vendorResponse) => {
+              commit("SET_VENDOR_UUID", vendorResponse.data.vendoruuid);
+              console.log(vendorResponse.data.vendoruuid);
+              router.push("/");
+            })
+            .catch((err) => {
+              console.log(`Gagal mengambil VendorUUID, ${err}`);
+            });
         })
         .catch((err) => {
           console.log(`GAGAL: ${err}`);
@@ -32,6 +53,8 @@ const store = createStore({
   getters: {
     isLoggedIn: (state) => state.isLoggedIn,
     message: (state) => state.message,
+    username: (state) => state.username,
+    vendoruuid: (state) => state.vendoruuid,
   },
 });
 
