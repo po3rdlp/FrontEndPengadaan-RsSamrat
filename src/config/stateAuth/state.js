@@ -5,6 +5,7 @@ import axios from "axios";
 const store = createStore({
   state: {
     isLoggedIn: false,
+    isLoggedOut: false,
     message: "",
     username: null,
     vendoruuid: null,
@@ -12,6 +13,9 @@ const store = createStore({
   mutations: {
     SET_IS_LOGGED_IN(state, value) {
       state.isLoggedIn = value;
+    },
+    SET_IS_LOGGED_OUT(state, value) {
+      state.isLoggedOut = value;
     },
     SET_MESSAGE(state, message) {
       state.message = message;
@@ -31,6 +35,7 @@ const store = createStore({
           commit("SET_IS_LOGGED_IN", true);
           commit("SET_MESSAGE", response.data);
           commit("SET_USERNAME", vendor.username);
+          commit("SET_IS_LOGGED_OUT", true);
           // mengambil vendor uuid (getvendorbyownerid)
           axios
             .get(
@@ -52,6 +57,7 @@ const store = createStore({
   },
   getters: {
     isLoggedIn: (state) => state.isLoggedIn,
+    isLoggedOut: (state) => state.isLoggedOut,
     message: (state) => state.message,
     username: (state) => state.username,
     vendoruuid: (state) => state.vendoruuid,
