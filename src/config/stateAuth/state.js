@@ -9,6 +9,7 @@ const store = createStore({
     message: "",
     username: null,
     vendoruuid: null,
+    vendorid: null,
   },
   mutations: {
     SET_IS_LOGGED_IN(state, value) {
@@ -25,6 +26,9 @@ const store = createStore({
     },
     SET_VENDOR_UUID(state, vendoruuid) {
       state.vendoruuid = vendoruuid;
+    },
+    SET_VENDOR_ID(state, vendorid) {
+      state.vendorid = vendorid;
     },
   },
   actions: {
@@ -43,8 +47,9 @@ const store = createStore({
             )
             .then((vendorResponse) => {
               commit("SET_VENDOR_UUID", vendorResponse.data.vendoruuid);
+              commit("SET_VENDOR_ID", vendorResponse.data.id);
               console.log(vendorResponse.data.vendoruuid);
-              router.push("/");
+              router.push({ path: "/", query: { user: vendor.username } });
             })
             .catch((err) => {
               console.log(`Gagal mengambil VendorUUID, ${err}`);
@@ -61,6 +66,7 @@ const store = createStore({
     message: (state) => state.message,
     username: (state) => state.username,
     vendoruuid: (state) => state.vendoruuid,
+    vendorid: (state) => state.vendorid,
   },
 });
 

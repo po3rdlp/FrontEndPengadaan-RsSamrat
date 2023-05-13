@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="containerCard">
+      <h1>{{ username }} Products</h1>
       <LoadingBar v-if="isLoading" />
       <div v-for="product in products" :key="product.id">
         <div class="card">
@@ -8,6 +9,7 @@
           <div class="card-content">
             <h1>{{ product.name }}</h1>
             <p>{{ product.productuuid }}</p>
+            <p>{{ product.quantity }}</p>
             <p>{{ product.description }}</p>
             <div style="margin-left: 50%">
               <button
@@ -52,7 +54,6 @@ export default {
 
   data() {
     return {
-      users: [],
       products: [],
 
       connectionFailed: false,
@@ -63,7 +64,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["vendoruuid"]),
+    ...mapGetters(["vendoruuid", "username"]),
   },
   created() {
     this.isLoading = true;

@@ -12,6 +12,9 @@
       >
     </div>
     <div>
+      <router-link to="/orderDetails" class="nav-link">See Orders</router-link>
+    </div>
+    <div>
       <router-link to="/vendorInput" class="nav-link">Vendor</router-link>
     </div>
     <div>
