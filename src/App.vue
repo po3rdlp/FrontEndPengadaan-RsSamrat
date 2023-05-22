@@ -40,6 +40,7 @@ export default {
   padding-top: 70px;
   margin-right: 10px;
   margin-left: 160px;
+  margin-bottom: 60px;
 }
 .contentNoLoggedin {
   text-align: center;
@@ -54,7 +55,6 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  z-index: 1;
 }
 
 footer span {

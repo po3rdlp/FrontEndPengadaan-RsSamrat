@@ -10,6 +10,7 @@ const store = createStore({
     username: null,
     vendoruuid: null,
     vendorid: null,
+    isPasswordIncorrect: false,
   },
   mutations: {
     SET_IS_LOGGED_IN(state, value) {
@@ -23,6 +24,9 @@ const store = createStore({
     },
     SET_USERNAME(state, username) {
       state.username = username;
+    },
+    SET_PASSWORD_INCORRECT(state, value) {
+      state.isPasswordIncorrect = value;
     },
     SET_VENDOR_UUID(state, vendoruuid) {
       state.vendoruuid = vendoruuid;
@@ -53,6 +57,7 @@ const store = createStore({
             })
             .catch((err) => {
               console.log(`Gagal mengambil VendorUUID, ${err}`);
+              commit("SET_PASSWORD_INCORRECT", true);
             });
         })
         .catch((err) => {
@@ -67,6 +72,7 @@ const store = createStore({
     username: (state) => state.username,
     vendoruuid: (state) => state.vendoruuid,
     vendorid: (state) => state.vendorid,
+    isPasswordIncorrect: (state) => state.isPasswordIncorrect,
   },
 });
 

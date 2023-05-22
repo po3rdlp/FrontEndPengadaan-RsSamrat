@@ -20,9 +20,9 @@
         </tr>
       </tbody>
     </table>
-    <loadingBarVue v-if="isLoading" />
     <button @click="loadPreviousPage" :disabled="prevDisabled">Prev</button>
     <button @click="loadNextPage" :disabled="nextDisabled">Next</button>
+    <loadingBarVue v-if="isLoading" />
   </div>
 </template>
 

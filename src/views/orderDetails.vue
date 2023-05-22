@@ -8,14 +8,16 @@
           <th>Order Date</th>
           <th>Product Name</th>
           <th>quantity</th>
+          <th>Amount</th>
         </tr>
       </thead>
       <tbody v-for="datas in data" :key="datas.id">
-        <tr>
-          <td>{{ datas.orderId }}</td>
+        <tr v-for="orderItem in datas.orderItems" :key="orderItem.id">
+          <td>{{ datas.id }}</td>
           <td>{{ datas.orderDate }}</td>
-          <td>{{ datas.productName }}</td>
-          <td>{{ datas.quantity }}</td>
+          <td>{{ orderItem.product.name }}</td>
+          <td>{{ orderItem.quantity }}</td>
+          <td>{{ datas.payment.amount }}</td>
         </tr>
       </tbody>
     </table>
@@ -38,10 +40,10 @@ export default {
   created() {
     axios
       .get(
-        `http://rsudsamrat.site:8080/pengadaan/dev/v1/orders/${this.vendorid}/0/10`
-      ) //getordersbyvendoridwithpagenation
+        `http://rsudsamrat.site:8080/pengadaan/dev/v1/orders/${this.vendorid}/vendor`
+      ) //getorderbyvendorid
       .then((response) => {
-        this.data = response.data.content;
+        this.data = response.data;
         console.log(response.data);
       })
       .catch((err) => {
