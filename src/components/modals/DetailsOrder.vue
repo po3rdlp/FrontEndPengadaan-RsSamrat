@@ -27,7 +27,6 @@
         <div class="buttons">
           <button class="button is-primary">Accept</button>
           <button class="button is-danger">Reject</button>
-          <button class="button is-info is-light">See BID</button>
         </div>
         <button
           style="display: flex; justify-content: flex-end; margin-top: 10px"
