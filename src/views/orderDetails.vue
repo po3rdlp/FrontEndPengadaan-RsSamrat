@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <p>All orders that hospitals request is coming here.</p>
     <table>
@@ -9,6 +9,7 @@
           <th>Product Name</th>
           <th>quantity</th>
           <th>Amount</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody v-for="datas in data" :key="datas.id">
@@ -18,22 +19,65 @@
           <td>{{ orderItem.product.name }}</td>
           <td>{{ orderItem.quantity }}</td>
           <td>{{ datas.payment.amount }}</td>
+          <td>
+            <button>Details</button><button>Reject</button
+            ><button>Accept</button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
+</template> -->
+<template>
+  <div>
+    <p>Semua pesanan yang diminta rumah sakit akan muncul di sini.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Tanggal Pesanan</th>
+          <th>Tindakan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="datas in data" :key="datas.id">
+          <td>{{ datas.id }}</td>
+          <td>{{ datas.orderDate }}</td>
+          <td>
+            <button @click="selectOrdersItem(datas)">Detail</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modals edit Product -->
+  <Teleport to="body">
+    <!-- pakai komponen modal, passing ke prop(lihat Editproduct.vue) -->
+    <modal
+      :show="showmodalSeeDetails"
+      :orders="selectedOrder"
+      @close="showmodalSeeDetails = false"
+    />
+  </Teleport>
 </template>
 
 <script>
 import axios from "axios";
+import modal from "../components/modals/DetailsOrder.vue";
 import { mapGetters } from "vuex";
 
 export default {
+  components: { modal },
+
   data() {
     return {
       data: [],
+      showmodalSeeDetails: false,
+      selectedOrder: null,
     };
   },
+
   computed: {
     ...mapGetters(["vendoruuid", "vendorid"]),
   },
@@ -49,6 +93,12 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+  },
+  methods: {
+    selectOrdersItem(order) {
+      this.showmodalSeeDetails = true;
+      this.selectedOrder = order;
+    },
   },
 };
 </script>
