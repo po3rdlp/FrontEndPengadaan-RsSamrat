@@ -40,6 +40,8 @@ const store = createStore({
       axios
         .post("http://rsudsamrat.site:8080/owners/login", vendor)
         .then((response) => {
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("username", vendor.username);
           commit("SET_IS_LOGGED_IN", true);
           commit("SET_MESSAGE", response.data);
           commit("SET_USERNAME", vendor.username);
@@ -52,6 +54,8 @@ const store = createStore({
             .then((vendorResponse) => {
               commit("SET_VENDOR_UUID", vendorResponse.data.vendoruuid);
               commit("SET_VENDOR_ID", vendorResponse.data.id);
+              localStorage.setItem("vendorUuid", vendorResponse.data.vendoruuid);
+              localStorage.setItem("vendorId", vendorResponse.data.id)
               console.log(vendorResponse.data.vendoruuid);
               router.push({ path: "/", query: { user: vendor.username } });
             })

@@ -10,6 +10,7 @@
             <h1>{{ product.name }}</h1>
             <p>{{ product.productuuid }}</p>
             <p>{{ product.quantity }}</p>
+            <p>{{ product.price }}</p>
             <p>{{ product.description }}</p>
             <div style="margin-left: 50%">
               <button

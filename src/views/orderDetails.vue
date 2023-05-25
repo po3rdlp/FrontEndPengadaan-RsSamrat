@@ -1,33 +1,3 @@
-<!-- <template>
-  <div>
-    <p>All orders that hospitals request is coming here.</p>
-    <table>
-      <thead>
-        <tr>
-          <th>Order Id</th>
-          <th>Order Date</th>
-          <th>Product Name</th>
-          <th>quantity</th>
-          <th>Amount</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody v-for="datas in data" :key="datas.id">
-        <tr v-for="orderItem in datas.orderItems" :key="orderItem.id">
-          <td>{{ datas.id }}</td>
-          <td>{{ datas.orderDate }}</td>
-          <td>{{ orderItem.product.name }}</td>
-          <td>{{ orderItem.quantity }}</td>
-          <td>{{ datas.payment.amount }}</td>
-          <td>
-            <button>Details</button><button>Reject</button
-            ><button>Accept</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</template> -->
 <template>
   <div>
     <p>Semua pesanan yang diminta rumah sakit akan muncul di sini.</p>
