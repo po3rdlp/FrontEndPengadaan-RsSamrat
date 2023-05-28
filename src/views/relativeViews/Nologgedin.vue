@@ -1,10 +1,13 @@
 <template>
   <h3>LOGIN TO ACCESSES CONTENT!!!</h3>
+
+  <font-awesome-icon icon="fas fa-user" />
+
+
 </template>
 
 <style>
 h3 {
-  font-size: 50px;
   font-family: monospace;
   color: red;
   animation-name: blink;
